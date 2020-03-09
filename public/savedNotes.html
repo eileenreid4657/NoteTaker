@@ -58,7 +58,7 @@
     <footer class="footer mt-4">
       <div class="container">
         <p>Control Panel</p>
-        <p><a href="#" id="clear">Clear Note</a> | <a href="/api/tables">API Note Link</a> | <a href="/api/waitlist">API
+        <p><a href="#" id="clear">Clear Note</a> | <a href="/api/notes">API Note Link</a> | <a href="/api/savedNotes">API
             Archive List</a>
       </div>
     </footer>
@@ -150,6 +150,8 @@
   }
 
   $("#clear").on("click", clearNote);
+  $("#save").on("fas fa-save text-light save-note", runNotesQuery); 
+  $("#edit").on("fas fa-pen text-light new-note", runSavedNotesQuery);
 
 
   // Run Queries!

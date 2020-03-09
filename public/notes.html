@@ -17,7 +17,8 @@
     <a class="navbar-brand" href="/">Note Taker
     </a>
     <div class="icons">
-      <i class="fas fa-save text-light save-note"></i>
+      <button id="saveNote"><i class="fas fa-save text-light save-note"></i></button>
+      <br>
       <i class="fas fa-pen text-light new-note"></i>
     </div>
   </nav>
@@ -29,14 +30,57 @@
           </ul>
         </div>
       </div>
-      <div class="col-8">
-        <input class="note-title" placeholder="Note Title" maxlength="28" type="text">
-        <textarea class="note-textarea" placeholder="Note Text"></textarea>
+      <div class="col-08">
+        <input id="nTitle" class="note-title" placeholder="Note Title" maxlength="28" type="text">
+        <br>
+        <textarea id="nBody" class="note-textarea" placeholder="Note Text"></textarea>
       </div>
     </div>
+
+    <div id="dispNotes"></div>
+    <footer class="footer">
+      <div class="container">
+        <p>
+          <a href="/api/notes">API Notes Link</a> |
+          <a href="/api/savedNotes">API Saved Notes List</a>
+      </div>
+    </footer>
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="/assets/js/index.js"></script>
+
+  <script type="text/javascript">
+
+  $("#saveNote").on("click", function(){
+    var noteData = {
+    notesSubject: $("#nTitle").val(),
+    notesBody: $("#nBody").val()
+  }
+
+  console.log(noteData);
+    $.post("/api/notes", noteData, function(cb){
+      console.log("Callback: "+JSON.stringify(cb));
+      $("#dispNotes").empty();
+      for(var i=0;i<cb.length;i++){
+        var h2 = $("<h2>");
+          h2.text(cb[i].notesBody);
+          $("#dispNotes").append(h2);
+        var h3 = $("<h3>");
+          h3.text(cb[i].notesSubject);
+          
+          $("#dispNotes").append(h3);
+      }
+      // for(var i=0;i<cb.length;i++){
+      //   var h2 = $("<h2>");
+      //     h2.text(cb[i].notesBody);
+      //     $("#dispNotes").append(h2);
+      // }
+    } )
+  })
+
+
+  
+  </script>
 </body>
 
 </html>

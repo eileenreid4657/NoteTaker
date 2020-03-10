@@ -62,13 +62,13 @@
       console.log("Callback: "+JSON.stringify(cb));
       $("#dispNotes").empty();
       for(var i=0;i<cb.length;i++){
+        var h1 = $("<h1>");
+          h1.text(cb[i].notesSubject);
+          $("#dispNotes").append(h1);
         var h2 = $("<h2>");
           h2.text(cb[i].notesBody);
           $("#dispNotes").append(h2);
-        var h3 = $("<h3>");
-          h3.text(cb[i].notesSubject);
-          
-          $("#dispNotes").append(h3);
+        
       }
       // for(var i=0;i<cb.length;i++){
       //   var h2 = $("<h2>");
